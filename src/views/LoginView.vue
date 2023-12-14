@@ -1,6 +1,7 @@
 <template>
     <div class="login">
         <div class="account-login-module">
+            <!-- 登录验证表单 -->
             <transition name="el-fade-in-linear">
                 <div v-show="showLogin" class="loginPageWrapper">
                     <div class="headerToggle">
@@ -31,6 +32,7 @@
                 </div>
             </transition>
 
+            <!-- 创建账户验证表单 -->
             <transition name="el-fade-in-linear">
                 <div v-show="showCreate" class="loginPageWrapper">
                     <div class="headerToggle">
@@ -59,6 +61,7 @@
                 </div>
             </transition>
 
+            <!-- 忘记密码验证表单 -->
             <transition name="el-fade-in-linear">
                 <div v-show="showReset" class="loginPageWrapper">
                     <div class="headerToggle">
@@ -87,6 +90,31 @@
                 </div>
             </transition>
 
+            <!-- 设置密码 -->
+            <transition name="el-fade-in-linear">
+                <div v-show="showsetPassword" class="loginPageWrapper">
+                    <div class="headerToggle">
+                        <span class="create-account-title">
+                            <img class="back" :src="isBackHovered ? 'images/back-active.png' : 'images/back.png'"
+                                @click="handleSetPasswordBackClick" @mouseover="handleBackOver" @mouseout="handleBackOut" alt="">
+                            设置密码
+                        </span>
+                    </div>
+                    <div class="form-wrap create-form">
+                        <el-form :model="commonForm" :rules="commonRules" ref="ruleForm" class="demo-ruleForm">
+                            <el-form-item class="el-item" prop="password">
+                                <el-input class="rounded-input" :type="showPassword ? 'text' : 'password'"
+                                    placeholder="请输入密码" v-model="loginForm.password"></el-input>
+                                <img class="eye-icon" :src="showPassword ? 'images/eye-on.png' : 'images/eye-close.png'"
+                                    @click="togglePasswordVisibility" />
+                            </el-form-item>
+                            <el-form-item>
+                                <el-button class="login-button" type="primary" @click="submitSetPassword">确认</el-button>
+                            </el-form-item>
+                        </el-form>
+                    </div>
+                </div>
+            </transition>
         </div>
 
 
@@ -103,7 +131,9 @@ export default {
             showReset: false,
             isBackHovered: false,
             isGetCodeDisabled: false,
+            showsetPassword:false,
             getCodeTxt: "获取验证码",
+            interval:null,
             loginForm: {
                 email: '',
                 password: ''
@@ -115,7 +145,8 @@ export default {
                 ],
                 password: [
                     { required: true, message: '请输入密码', trigger: 'blur' },
-                    { min: 6, max: 20, message: '密码长度应为6-20位', trigger: 'blur' }
+                    { min: 6, max: 11, message: '密码长度应为6-11位', trigger: 'blur' },
+                    { pattern: /^(?![0-9]*$)([A-Za-z0-9]+$)/, message: '密码只能由数字字母组成，并且不能是纯数字或者是特殊字符', trigger: 'blur' }
                 ]
             },
 
@@ -147,17 +178,34 @@ export default {
                 }
             });
         },
-        // 创建账号
+        // 提交创建账户验证表单
         submitCreate() {
-           
+
         },
-        // 重置密码
+        // 提交重置密码验证表单
         submitReset() {
+
+        },
+        // 确定设置密码
+        submitSetPassword(){
 
         },
         // 获取验证码
         getCode() {
-            console.log(this.commonForm.email,this.commonForm.code)
+            console.log(this.commonForm.email, this.commonForm.code)
+            // 成功后倒计时
+            this.isGetCodeDisabled = true
+            let time = 60
+            this.interval = setInterval(() => {
+                if(time>=0){
+                    this.getCodeTxt = `重新获取(${time}s)`
+                    time --
+                }else{
+                    this.getCodeTxt = '重新获取验证码'
+                    clearInterval(this.interval)
+                }
+            }, 1000);
+
         },
         clickCreate() {
             this.showLogin = false
@@ -165,20 +213,32 @@ export default {
                 this.showCreate = true
             }, 300);
         },
-        clickForget(){
+        clickForget() {
             this.showLogin = false
             setTimeout(() => {
                 this.showReset = true
             }, 300);
         },
         handleCreateBackClick() {
-            this.showCreate = false
+            this.showCreate = false,
+            this.getCodeTxt = "获取验证码",
+            this.isGetCodeDisabled = false,
+            clearInterval(this.interval)
             setTimeout(() => {
                 this.showLogin = true
             }, 300);
         },
         handleResetBackClick() {
             this.showReset = false
+            this.getCodeTxt = "获取验证码",
+            this.isGetCodeDisabled = false,
+            clearInterval(this.interval)
+            setTimeout(() => {
+                this.showLogin = true
+            }, 300);
+        },
+        handleSetPasswordBackClick(){
+            this.showsetPassword = false
             setTimeout(() => {
                 this.showLogin = true
             }, 300);
@@ -190,7 +250,7 @@ export default {
         handleBackOut() {
             this.isBackHovered = false
         },
-        
+
 
 
     }
@@ -248,6 +308,8 @@ export default {
                     .el-button.is-disabled {
                         background: #5A82F5;
                         color: #fff;
+                        border-top-right-radius: 40px;
+                        border-bottom-right-radius: 40px;
                     }
                 }
             }
@@ -302,7 +364,7 @@ export default {
                     cursor: pointer;
                 }
 
-                .forget-password{
+                .forget-password {
                     position: absolute;
                     right: 0;
                     top: 35px;
