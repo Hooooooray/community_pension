@@ -30,7 +30,6 @@ export default {
 .home {
   min-height: 410px;
   height: 100vh;
-  /* overflow: hidden; */
 
   .home-page-block {
     width: 100%;
