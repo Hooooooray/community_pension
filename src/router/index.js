@@ -3,29 +3,6 @@ import VueRouter from 'vue-router'
 
 Vue.use(VueRouter)
 
-// const routes = [
-//   {
-//     path: '/',
-//     name: 'home',
-//     component: () => import('../views/HomeView.vue')
-//   },
-//   {
-//     path: '/news',
-//     name: 'news',
-//     component: () => import('../views/NewsView.vue')
-//   },
-//   {
-//     path:'/activity',
-//     name:'activity',
-//     component: ()=> import('../views/ActivityView.vue')
-//   },
-//   {
-//     path:'/login',
-//     name:'login',
-//     component: ()=> import('../views/LoginView.vue')
-//   }
-// ]
-
 const routes = [
   {
     path: '/',
@@ -55,9 +32,6 @@ const routes = [
       }
     ]
   },
-
-
-
 ]
 
 
