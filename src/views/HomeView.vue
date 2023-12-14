@@ -1,6 +1,6 @@
 <template>
   <div class="home">
-    <video class="fullscreen-video" autoplay loop>
+    <video class="fullscreen-video" autoplay loop muted>
       <source src="images/index-video.mp4" type="video/mp4">
     </video>
     <div class="home-page-block">
