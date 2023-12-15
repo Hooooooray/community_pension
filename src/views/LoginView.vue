@@ -126,12 +126,12 @@ export default {
         return {
             input: '',
             showPassword: false,
-            showLogin: false,
+            showLogin: true,
             showCreate: false,
             showReset: false,
             isBackHovered: false,
             isGetCodeDisabled: false,
-            showsetPassword:true,
+            showsetPassword:false,
             getCodeTxt: "获取验证码",
             interval:null,
             loginForm: {
