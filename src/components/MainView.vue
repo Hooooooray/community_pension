@@ -61,6 +61,7 @@ export default {
         height: 64px;
         border-bottom: 1px solid #e6e6e6;
         background: #ffffff00;
+        min-width: 990px;
 
         .nav-left {
             flex: 12;
