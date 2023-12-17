@@ -2,7 +2,15 @@
   <div class="activity">
     <div class="swiper-container">
       <div class="swiper-wrapper">
-        <div class="swiper-slide"><img src="images/zijie/DM_20231214205634_031.png" alt=""></div>
+        <div class="swiper-slide">
+          <img src="images/zijie/DM_20231214205634_031.png" alt="">
+          <div class="swiper-desc">
+            <h1 class="desc-title">散步</h1>
+            <p class="desc-content">
+              散步是一项适合老年人的活动。它不仅可以帮助老年人保持身体健康，还可以提高心情和精神状态。散步是一种有氧运动，可以提高心肺功能，增强血液循环和氧气供应，有助于预防心血管疾病。同时，散步也可以促进骨骼健康，增加骨密度，预防骨质疏松症和骨折的发生。散步还可以帮助老年人保持关节的灵活性和活动范围，减少关节疼痛和僵硬感。此外，散步还可以控制体重，提高睡眠质量，释放身体内的内啡肽和多巴胺等神经递质，促进心情愉悦和精神放松。
+            </p>
+          </div>
+        </div>
         <div class="swiper-slide"><img src="images/zijie/DM_20231214205634_032.jpg" alt=""></div>
         <div class="swiper-slide"><img src="images/zijie/DM_20231214205634_033.jpg" alt=""></div>
         <div class="swiper-slide">Slide 1</div>
@@ -84,6 +92,23 @@ export default {
       min-height: 590px;
       /* height: calc(100vh - 64px); */
       /* height: 110vh; */
+    }
+
+    .swiper-desc{
+      position: absolute;
+      left: 100px;
+      .desc-title{
+        color: #1f2329;;
+        font-size: 28px;
+        line-height: 32px;
+        font-weight: 700;
+      }
+      .desc-content{
+        width: 408px;
+        font-size: 16px;
+        color: rgb(31, 35, 41);
+        line-height: 26px;
+      }
     }
   }
 
