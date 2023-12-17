@@ -108,6 +108,12 @@
                                 <img class="eye-icon" :src="showPassword ? 'images/eye-on.png' : 'images/eye-close.png'"
                                     @click="togglePasswordVisibility" />
                             </el-form-item>
+                            <el-form-item class="el-item" prop="password">
+                                <el-input class="rounded-input" :type="showPassword ? 'text' : 'password'"
+                                    placeholder="请再次确认密码" v-model="loginForm.rePassword"></el-input>
+                                <img class="eye-icon" :src="showPassword ? 'images/eye-on.png' : 'images/eye-close.png'"
+                                    @click="togglePasswordVisibility" />
+                            </el-form-item>
                             <el-form-item>
                                 <el-button class="login-button" type="primary" @click="submitSetPassword">确认</el-button>
                             </el-form-item>
@@ -136,7 +142,8 @@ export default {
             interval:null,
             loginForm: {
                 email: '',
-                password: ''
+                password: '',
+                rePassword:'',
             },
             loginRules: {
                 email: [
