@@ -132,12 +132,17 @@ export default {
         return {
             input: '',
             showPassword: false,
+            // 下面四个show开头的变量控制不同模块的显示
+            // 登录模块
             showLogin: true,
+            // 创建账户模块
             showCreate: false,
+            // 重置密码模块
             showReset: false,
+            // 设置密码模块
+            showsetPassword:false,
             isBackHovered: false,
             isGetCodeDisabled: false,
-            showsetPassword:false,
             getCodeTxt: "获取验证码",
             interval:null,
             loginForm: {
@@ -200,7 +205,22 @@ export default {
         // 获取验证码
         getCode() {
             console.log(this.commonForm.email, this.commonForm.code)
-            // 成功后倒计时
+            /* 成功后倒计时，你需要在发送验证码成功之后的回调函数调用下面这些内容
+            .then(res=>{
+                this.isGetCodeDisabled = true
+                let time = 60
+                this.interval = setInterval(() => {
+                    if(time>=0){
+                      this.getCodeTxt = `重新获取(${time}s)`
+                      time --
+                    }else{
+                        this.isGetCodeDisabled = false
+                        this.getCodeTxt = '重新获取验证码'
+                        clearInterval(this.interval)
+                    }
+                }, 1000);
+            })
+            */
             this.isGetCodeDisabled = true
             let time = 60
             this.interval = setInterval(() => {
@@ -208,6 +228,7 @@ export default {
                     this.getCodeTxt = `重新获取(${time}s)`
                     time --
                 }else{
+                    this.isGetCodeDisabled = false
                     this.getCodeTxt = '重新获取验证码'
                     clearInterval(this.interval)
                 }
@@ -257,8 +278,6 @@ export default {
         handleBackOut() {
             this.isBackHovered = false
         },
-
-
 
     }
 }

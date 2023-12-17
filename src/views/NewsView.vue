@@ -28,19 +28,21 @@
 export default {
     data() {
         return {
+            // items这个数组对象其实就是将新闻中心的新闻列举出来，一个对象就是一条新闻。存放id，图片地址，标题，内容等字段，可以根据你自己的需求和后端配合增加相应的字段。
             items: [
-                { id: 1, imageUrl: 'images/example1.jpg', title: '旅德大熊猫“梦想”和“梦圆”平安抵达成都旅德大熊猫“梦想”和“梦圆”平安抵达成都旅德大熊猫“梦想”和“梦圆”平安抵达成都', description: '在中德双方的共同保障下，大熊猫“梦想”和“梦圆”于今日（12月17日）平安抵达成都。', content: "央视网消息：据成都大熊猫繁育研究基地官微消息，在中德双方的共同保障下，大熊猫“梦想”和“梦圆”于今日（12月17日）平安抵达成都。" },
+                { id: 1, imageUrl: 'images/example1.jpg', title: '旅德大熊猫“梦想”和“梦圆”平安抵达成都', description: '在中德双方的共同保障下，大熊猫“梦想”和“梦圆”于今日（12月17日）平安抵达成都。', content: "央视网消息：据成都大熊猫繁育研究基地官微消息，在中德双方的共同保障下，大熊猫“梦想”和“梦圆”于今日（12月17日）平安抵达成都。" },
                 { id: 2, imageUrl: 'images/example2.jpg', title: 'Title 2', description: 'Description 2',content:"content2" },
                 { id: 3, imageUrl: 'images/example3.jpg', title: 'Title 3', description: 'Description 3' },
             ],
             drawer: false,
+            // 以下三个变量就是弹出层要显示的内容
             articleImageUrl: null,
             articleTitle: null,
-            // articleDescription:null,
             articleContent: null
         }
     },
     methods: {
+        // 点击的时候找到数组里的一个对象的值，动态更新要显示的内容
         clickNewsItem(id) {
             for (let item of this.items) {
                 if (item.id === id) {
@@ -121,6 +123,7 @@ export default {
         display: flex;
         flex-direction: column;
         align-items: center;
+        padding-bottom: 20px;
 
         .article-title {
             margin: 10px 0;
